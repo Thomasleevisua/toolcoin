@@ -18,7 +18,7 @@ chat_id = 'YOUR_CHAT_ID'
 report_interval = 3600  # 3600 giây = 1 giờ
 
 # Cấu hình lệnh chạy SRBMiner-MULTI
-srbminer_command = (f'./SRBMiner-MULTI --pool {pool} --wallet {wallet_address} '
+srbminer_command = (f'cd SRBMiner-Multi-2-6-4 && ./SRBMiner-MULTI --pool {pool} --wallet {wallet_address} '
                     f'--cpu-threads {threads} --donate-level 1')
 
 def send_telegram_message(text):
