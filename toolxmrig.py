@@ -8,6 +8,7 @@ pool = "pool.supportxmr.com:3333"
 wallet_address = "YOUR_MONERO_WALLET_ADDRESS"  # Thay bằng địa chỉ ví Monero của bạn
 worker_name = "my_worker"
 threads = 4  # Số luồng CPU bạn muốn sử dụng
+max_cpu_usage = 50  # Phần trăm CPU tối đa bạn muốn giới hạn
 
 # Cấu hình Telegram Bot
 telegram_token = 'YOUR_BOT_TOKEN'
@@ -67,6 +68,11 @@ def monitor_miner(process):
                            f"📥 Data Received: {bytes_recv:.2f} MB")
                 send_telegram_message(message)
                 last_report_time = time.time()  # Cập nhật thời gian gửi báo cáo
+                
+            # Giới hạn sử dụng CPU
+            if cpu_usage > max_cpu_usage:
+                send_telegram_message(f"Warning: CPU usage exceeded {max_cpu_usage}%!")
+                print(f"Warning: CPU usage exceeded {max_cpu_usage}%!")
     except KeyboardInterrupt:
         print("Stopping miner...")
         process.terminate()
